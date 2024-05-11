@@ -10,4 +10,9 @@ public class LevelManagerScript : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Game is exiting");
+    }
 }
