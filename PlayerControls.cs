@@ -55,9 +55,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""AuxButton"",
+                    ""name"": ""WestButton"",
                     ""type"": ""Button"",
                     ""id"": ""925dff71-eaad-46a8-bb07-c0c581ccaa4c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NorthButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""061687b8-bc78-43aa-b3f0-67d71c417aa7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -105,7 +114,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard;Gamepad"",
-                    ""action"": ""AuxButton"",
+                    ""action"": ""WestButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""053bc30d-39b6-4a04-b25a-d225e90a905a"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard;Gamepad"",
+                    ""action"": ""NorthButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -142,7 +162,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_SouthButton = m_Player.FindAction("SouthButton", throwIfNotFound: true);
         m_Player_SliderUp = m_Player.FindAction("SliderUp", throwIfNotFound: true);
         m_Player_SliderDown = m_Player.FindAction("SliderDown", throwIfNotFound: true);
-        m_Player_AuxButton = m_Player.FindAction("AuxButton", throwIfNotFound: true);
+        m_Player_WestButton = m_Player.FindAction("WestButton", throwIfNotFound: true);
+        m_Player_NorthButton = m_Player.FindAction("NorthButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,7 +228,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SouthButton;
     private readonly InputAction m_Player_SliderUp;
     private readonly InputAction m_Player_SliderDown;
-    private readonly InputAction m_Player_AuxButton;
+    private readonly InputAction m_Player_WestButton;
+    private readonly InputAction m_Player_NorthButton;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -215,7 +237,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @SouthButton => m_Wrapper.m_Player_SouthButton;
         public InputAction @SliderUp => m_Wrapper.m_Player_SliderUp;
         public InputAction @SliderDown => m_Wrapper.m_Player_SliderDown;
-        public InputAction @AuxButton => m_Wrapper.m_Player_AuxButton;
+        public InputAction @WestButton => m_Wrapper.m_Player_WestButton;
+        public InputAction @NorthButton => m_Wrapper.m_Player_NorthButton;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -234,9 +257,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SliderDown.started += instance.OnSliderDown;
             @SliderDown.performed += instance.OnSliderDown;
             @SliderDown.canceled += instance.OnSliderDown;
-            @AuxButton.started += instance.OnAuxButton;
-            @AuxButton.performed += instance.OnAuxButton;
-            @AuxButton.canceled += instance.OnAuxButton;
+            @WestButton.started += instance.OnWestButton;
+            @WestButton.performed += instance.OnWestButton;
+            @WestButton.canceled += instance.OnWestButton;
+            @NorthButton.started += instance.OnNorthButton;
+            @NorthButton.performed += instance.OnNorthButton;
+            @NorthButton.canceled += instance.OnNorthButton;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -250,9 +276,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SliderDown.started -= instance.OnSliderDown;
             @SliderDown.performed -= instance.OnSliderDown;
             @SliderDown.canceled -= instance.OnSliderDown;
-            @AuxButton.started -= instance.OnAuxButton;
-            @AuxButton.performed -= instance.OnAuxButton;
-            @AuxButton.canceled -= instance.OnAuxButton;
+            @WestButton.started -= instance.OnWestButton;
+            @WestButton.performed -= instance.OnWestButton;
+            @WestButton.canceled -= instance.OnWestButton;
+            @NorthButton.started -= instance.OnNorthButton;
+            @NorthButton.performed -= instance.OnNorthButton;
+            @NorthButton.canceled -= instance.OnNorthButton;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -293,6 +322,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnSouthButton(InputAction.CallbackContext context);
         void OnSliderUp(InputAction.CallbackContext context);
         void OnSliderDown(InputAction.CallbackContext context);
-        void OnAuxButton(InputAction.CallbackContext context);
+        void OnWestButton(InputAction.CallbackContext context);
+        void OnNorthButton(InputAction.CallbackContext context);
     }
 }
