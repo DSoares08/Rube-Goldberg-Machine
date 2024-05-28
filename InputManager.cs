@@ -9,6 +9,8 @@ public class InputManager : MonoBehaviour
     public Button nb;
     public Slider mySlider;
     private PlayerControls inputActions;
+    public static bool var1 = false;
+    public static bool var2 = false;
 
     private void Awake()
     {
@@ -42,13 +44,17 @@ public class InputManager : MonoBehaviour
 
     private void OnWestButtonPressed(InputAction.CallbackContext context)
     {
-        Event.KeyboardEvent("c");
+        var1 = true;
+        System.Threading.Thread.Sleep(300);
+        var1 = false;
         wb.onClick.Invoke();
     }
 
     private void OnNorthButtonPressed(InputAction.CallbackContext context)
     {
-        Event.KeyboardEvent("a");
+        var2 = true;
+        System.Threading.Thread.Sleep(300);
+        var2 = false;
         nb.onClick.Invoke();
     }
 
