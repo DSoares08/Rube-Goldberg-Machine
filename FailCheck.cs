@@ -12,6 +12,7 @@ public class FailCheck : MonoBehaviour
     public GameObject s1;
     public GameObject s2;
     public GameObject s3;
+    public GameObject s4;
     public float leftx;
     public float rightx;
     public float bottomy;
@@ -29,7 +30,7 @@ public class FailCheck : MonoBehaviour
         {
             OnStationary();
         }
-        if (ball.transform.position == lastPosition && !s1.activeSelf && !s2.activeSelf && !s3.activeSelf && !failureScreen.activeSelf)
+        if (ball.transform.position == lastPosition && !s1.activeSelf && !s2.activeSelf && !s3.activeSelf && !failureScreen.activeSelf && !s4.activeSelf)
         {
             timer += Time.deltaTime;
 

@@ -53,12 +53,12 @@ public class Cheatmode : MonoBehaviour
             }
             if (e.activeSelf)
             {
-                b5.gravityScale = 1;
+                b5.gravityScale = 3;
                 eb.onClick.Invoke();
             }
             if (f.activeSelf)
             {
-                b5.gravityScale = 1;
+                b5.gravityScale = 3;
                 fb.onClick.Invoke();
             }
         }
