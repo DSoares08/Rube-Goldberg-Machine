@@ -6,22 +6,11 @@ using UnityEngine.UI;
 public class Cheatmode : MonoBehaviour
 {
     public GameObject a;
-    public GameObject b;
-    public GameObject c;
-    public GameObject d;
-    public GameObject e;
-    public GameObject f;
+    public int gravity;
     public Button ab;
-    public Button bb;
-    public Button cb;
-    public Button db;
-    public Button eb;
-    public Button fb;
     public Rigidbody2D b1;
     public Rigidbody2D b2;
     public Rigidbody2D b3;
-    public Rigidbody2D b4;
-    public Rigidbody2D b5;
 
     void Update()
     {
@@ -29,37 +18,10 @@ public class Cheatmode : MonoBehaviour
         {
             if (a.activeSelf)
             {
-                b1.gravityScale = 1;
-                b2.gravityScale = 1;
-                b3.gravityScale = 1;
+                b1.gravityScale = gravity;
+                b2.gravityScale = gravity;
+                b3.gravityScale = gravity;
                 ab.onClick.Invoke();
-            }
-            if (b.activeSelf)
-            {
-                b4.gravityScale = 1;
-                bb.onClick.Invoke();
-            }
-            if (c.activeSelf)
-            {
-                b1.gravityScale = 1;
-                b2.gravityScale = 1;
-                b3.gravityScale = 1;
-                cb.onClick.Invoke();
-            }
-            if (d.activeSelf)
-            {
-                b4.gravityScale = 1;
-                db.onClick.Invoke();
-            }
-            if (e.activeSelf)
-            {
-                b5.gravityScale = 3;
-                eb.onClick.Invoke();
-            }
-            if (f.activeSelf)
-            {
-                b5.gravityScale = 3;
-                fb.onClick.Invoke();
             }
         }
     }
