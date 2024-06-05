@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+
 public class InputManager : MonoBehaviour
 {
     public Button sb; // Reference to the Button GameObject
@@ -9,9 +10,16 @@ public class InputManager : MonoBehaviour
     public Button nb;
     public Slider mySlider;
     private PlayerControls inputActions;
-    public static bool var1 = false;
-    public static bool var2 = false;
-
+    private bool L2 = false;
+    private bool R2 = false;
+    public GameObject a;
+    public int gravity;
+    public Button ab;
+    public Rigidbody2D b1;
+    public Rigidbody2D b2;
+    public Rigidbody2D b3;
+    public static bool ni = false;
+    private Vector2 leftStickValue;
     private void Awake()
     {
         inputActions = new PlayerControls();
@@ -23,8 +31,12 @@ public class InputManager : MonoBehaviour
         inputActions.Player.SouthButton.performed += OnSouthButtonPressed;
         inputActions.Player.WestButton.performed += OnWestButtonPressed;
         inputActions.Player.NorthButton.performed += OnNorthButtonPressed;
+        inputActions.Player.NorthButton.canceled += OnNorthButtonReleased;
         inputActions.Player.SliderUp.performed += OnSliderUpPressed;
-        inputActions.Player.SliderDown.performed += OnSliderDownPressed;
+        inputActions.Player.R2.performed += OnR2Pressed;
+        inputActions.Player.L2.performed += OnL2Pressed;
+        inputActions.Player.R2.canceled += OnR2Released;
+        inputActions.Player.L2.canceled += OnL2Released;
     }
 
     private void OnDisable()
@@ -32,8 +44,12 @@ public class InputManager : MonoBehaviour
         inputActions.Player.SouthButton.performed -= OnSouthButtonPressed;
         inputActions.Player.WestButton.performed -= OnWestButtonPressed;
         inputActions.Player.NorthButton.performed -= OnNorthButtonPressed;
+        inputActions.Player.NorthButton.canceled -= OnNorthButtonReleased;
         inputActions.Player.SliderUp.performed -= OnSliderUpPressed;
-        inputActions.Player.SliderDown.performed -= OnSliderDownPressed;
+        inputActions.Player.R2.performed -= OnR2Pressed;
+        inputActions.Player.L2.performed -= OnL2Pressed;
+        inputActions.Player.R2.canceled -= OnR2Released;
+        inputActions.Player.L2.canceled -= OnL2Released;
         inputActions.Disable();
     }
 
@@ -44,29 +60,61 @@ public class InputManager : MonoBehaviour
 
     private void OnWestButtonPressed(InputAction.CallbackContext context)
     {
-        var1 = true;
-        System.Threading.Thread.Sleep(300);
-        var1 = false;
         wb.onClick.Invoke();
     }
 
     private void OnNorthButtonPressed(InputAction.CallbackContext context)
     {
-        var2 = true;
-        System.Threading.Thread.Sleep(300);
-        var2 = false;
+        ni = true;
         nb.onClick.Invoke();
     }
 
     private void OnSliderUpPressed(InputAction.CallbackContext context)
     {
-        float sliderChange = Time.deltaTime; // Adjust sensitivity as needed
-        mySlider.value = Mathf.Clamp(mySlider.value + sliderChange, mySlider.minValue, mySlider.maxValue);
+        leftStickValue = context.ReadValue<Vector2>();
+
     }
 
-    private void OnSliderDownPressed(InputAction.CallbackContext context) 
+   
+
+    private void OnR2Pressed(InputAction.CallbackContext context)
     {
-        float sliderChange = -Time.deltaTime; // Adjust sensitivity as needed
+        R2 = true;
+    }
+
+    private void OnL2Pressed(InputAction.CallbackContext context)
+    {
+        L2 = true;
+    }
+    
+    private void OnR2Released(InputAction.CallbackContext context)
+    {
+        R2 = false;
+    }
+
+    private void OnL2Released(InputAction.CallbackContext context)
+    {
+        L2 = false;
+    }
+
+    private void OnNorthButtonReleased(InputAction.CallbackContext context)
+    {
+        ni = false;
+    }
+
+    void Update()
+    {
+        if (L2 && R2)
+        {
+            if (a.activeSelf)
+            {
+                b1.gravityScale = gravity;
+                b2.gravityScale = gravity;
+                b3.gravityScale = gravity;
+                ab.onClick.Invoke();
+            }
+        }
+        float sliderChange = leftStickValue.x * 10 * Time.deltaTime;
         mySlider.value = Mathf.Clamp(mySlider.value + sliderChange, mySlider.minValue, mySlider.maxValue);
     }
 }

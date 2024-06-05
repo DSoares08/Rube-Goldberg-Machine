@@ -14,7 +14,7 @@ public class Cheatmode : MonoBehaviour
 
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.C) && Input.GetKeyDown(KeyCode.A)) || (InputManager.var1 && InputManager.var2))
+        if ((Input.GetKeyDown(KeyCode.C) && Input.GetKeyDown(KeyCode.A)))
         {
             if (a.activeSelf)
             {

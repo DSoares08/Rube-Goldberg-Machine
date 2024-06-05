@@ -21,7 +21,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) && !AuxScreen1.activeSelf && !AuxScreen2.activeSelf && !AuxScreen3.activeSelf && !AuxScreen4.activeSelf)
+        if (Input.GetKeyDown(KeyCode.P) && !AuxScreen1.activeSelf && !AuxScreen2.activeSelf && !AuxScreen3.activeSelf && !AuxScreen4.activeSelf || InputManager.ni && !AuxScreen1.activeSelf && !AuxScreen2.activeSelf && !AuxScreen3.activeSelf && !AuxScreen4.activeSelf)
         {
             Audio.Pause();
             if (Audio1.isPlaying)

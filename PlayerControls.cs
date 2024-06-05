@@ -71,6 +71,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""R2"",
+                    ""type"": ""Button"",
+                    ""id"": ""1dc1ce2e-e99a-463a-aafa-51978f3b722a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""L2"",
+                    ""type"": ""Button"",
+                    ""id"": ""783c221d-b27f-47ed-b6eb-518c16c88d41"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -128,6 +146,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""NorthButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ae9843e5-9260-439b-a85e-444b8f51a888"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""R2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff451a2e-e0db-460b-a318-0aa1eb848fe1"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""L2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +204,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_SliderDown = m_Player.FindAction("SliderDown", throwIfNotFound: true);
         m_Player_WestButton = m_Player.FindAction("WestButton", throwIfNotFound: true);
         m_Player_NorthButton = m_Player.FindAction("NorthButton", throwIfNotFound: true);
+        m_Player_R2 = m_Player.FindAction("R2", throwIfNotFound: true);
+        m_Player_L2 = m_Player.FindAction("L2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -230,6 +272,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SliderDown;
     private readonly InputAction m_Player_WestButton;
     private readonly InputAction m_Player_NorthButton;
+    private readonly InputAction m_Player_R2;
+    private readonly InputAction m_Player_L2;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -239,6 +283,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @SliderDown => m_Wrapper.m_Player_SliderDown;
         public InputAction @WestButton => m_Wrapper.m_Player_WestButton;
         public InputAction @NorthButton => m_Wrapper.m_Player_NorthButton;
+        public InputAction @R2 => m_Wrapper.m_Player_R2;
+        public InputAction @L2 => m_Wrapper.m_Player_L2;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -263,6 +309,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @NorthButton.started += instance.OnNorthButton;
             @NorthButton.performed += instance.OnNorthButton;
             @NorthButton.canceled += instance.OnNorthButton;
+            @R2.started += instance.OnR2;
+            @R2.performed += instance.OnR2;
+            @R2.canceled += instance.OnR2;
+            @L2.started += instance.OnL2;
+            @L2.performed += instance.OnL2;
+            @L2.canceled += instance.OnL2;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -282,6 +334,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @NorthButton.started -= instance.OnNorthButton;
             @NorthButton.performed -= instance.OnNorthButton;
             @NorthButton.canceled -= instance.OnNorthButton;
+            @R2.started -= instance.OnR2;
+            @R2.performed -= instance.OnR2;
+            @R2.canceled -= instance.OnR2;
+            @L2.started -= instance.OnL2;
+            @L2.performed -= instance.OnL2;
+            @L2.canceled -= instance.OnL2;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -324,5 +382,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnSliderDown(InputAction.CallbackContext context);
         void OnWestButton(InputAction.CallbackContext context);
         void OnNorthButton(InputAction.CallbackContext context);
+        void OnR2(InputAction.CallbackContext context);
+        void OnL2(InputAction.CallbackContext context);
     }
 }
